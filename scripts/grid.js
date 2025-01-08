@@ -1,3 +1,5 @@
+import { Tetromino } from './tetromino.js';
+
 export class Grid {
     constructor(canvas, rows, cols, cellSize, space) {
         this.canvas = canvas;
@@ -10,6 +12,8 @@ export class Grid {
         this.resetMatrix(); // corrected typo
         this.canvas.width = this.cols * this.cellSize + (this.space*this.cols);
         this.canvas.height = this.rows * this.cellSize + (this.space*this.rows);    
+
+        this.block = new Tetromino(this.canvas, this.cellSize, [], {row: 0, col: 0}, 0, 'black'); // corrected typo
     }
 
     resetMatrix() { // corrected typo
@@ -43,16 +47,20 @@ export class Grid {
         for (let r = 0; r < this.rows; r++) {
             for (let c = 0; c < this.cols; c++) {
                 const position = this.getCoordinates(c, r);
-                this.drawSquare(position.x, position.y, this.cellSize, 'white', 'black');
+                if (this.matrix[r][c] !== 0) {
+                    this.drawSquare(position.x, position.y, this.cellSize, 'gray', 'black');
+                } else {
+                    this.drawSquare(position.x, position.y, this.cellSize, 'white', 'black');
+                }
             }
         }
-        this.printMatrix(); // corrected typo
+        this.printMatrix();
     }
 
-    printMatrix() { // corrected typo
+    printMatrix() {
         let text = "";
-        this.matrix.forEach((row) => { // corrected typo
-            text += row.join(" ") + "\n";    
+        this.matrix.forEach((row) => {
+            text += row.join(" ") + "\n";
         });
         console.log(text);
     }

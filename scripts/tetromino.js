@@ -6,7 +6,7 @@ class Position {
 }
 
 class Tetromino {
-    constructor(canvas, cellSize, shapes, initPosition, id, color) {
+    constructor(canvas, cellSize, shapes = [], initPosition = new Position, id=1) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.cellSize = cellSize;
@@ -15,7 +15,7 @@ class Tetromino {
         this.initPosition = initPosition;
         this.position = new Position(this.initPosition.row, this.initPosition.column);
         this.id = id;
-        this.color = color;
+        
     }
 
     drawSquare(x, y, size, color) {
@@ -200,4 +200,41 @@ const TetrominoTypes = {
     }
 };
 
-export { Position, Tetromino, TetrominoTypes };
+class TetrominosBag {
+    constructor(canvas,celleSize) {
+        this.canvas = canvas;
+        this.cellSize = celleSize;
+        this.bag = [];
+    }
+    fillBag() {
+        const tetrominosTypes = [
+            
+            TetrominoTypes.T,
+            TetrominoTypes.O,
+            TetrominoTypes.I,
+            TetrominoTypes.S,
+            TetrominoTypes.Z,
+            TetrominoTypes.J,
+            TetrominoTypes.L,
+
+        ]
+        this.bag.length=0;
+        tetrominosTypes.forEach((type) => {
+            this.bag.push(new Tetromino(
+                this.canvas, this.cellSize, type.shapes, type.initPosition, type.id, 'red'
+            ));
+        });
+        for(let i= this.bag.length-1; i>0; i--){
+            let j = Math.floor(Math.random() * (i+1));
+            [this.bag[i], this.bag[j]] = [this.bag[j], this.bag[i]];
+            }
+        }
+        nextTetromino(){
+            if (this.bag.length === 0){
+                this.fillBag();
+            }
+            return this.bag.pop();
+        }    
+}
+
+export { Position, Tetromino, TetrominoTypes, TetrominosBag};
