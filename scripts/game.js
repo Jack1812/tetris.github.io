@@ -41,7 +41,7 @@ export class Game {
     }
 
     blockedTetromino() {
-        const tetrominoPosition = this.currentTetromino.currentPosition();
+        const tetrominoPosition = this.currentTetromino.currentPositions();
         for (let i = 0; i < tetrominoPosition.length; i++) {
             if (!this.boardTetris.isEmpty(tetrominoPosition[i].row, tetrominoPosition[i].column)) {
                 return true;
@@ -100,7 +100,8 @@ export class Game {
                 [tetrominoPositions[i].column] = this.currentTetromino.id;
         }
         
-
+        this.boardTetris.clearFullRows();
+        
         if (this.boardTetris.gameOver()) {
             return true;
         }else {

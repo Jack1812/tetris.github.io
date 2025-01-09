@@ -8,19 +8,19 @@ export class Grid {
         this.cols = cols;
         this.cellSize = cellSize; // corrected typo
         this.space = space;
-        this.matrix = []; // corrected typo
-        this.resetMatrix(); // corrected typo
+        this.matriz = []; // corrected typo
+        this.resetmatriz(); // corrected typo
         this.canvas.width = this.cols * this.cellSize + (this.space*this.cols);
         this.canvas.height = this.rows * this.cellSize + (this.space*this.rows);    
 
         this.block = new Tetromino(this.canvas, this.cellSize, [], {row: 0, col: 0}, 0, 'black'); // corrected typo
     }
 
-    resetMatrix() { // corrected typo
+    resetmatriz() { // corrected typo
         for (let r = 0; r < this.rows; r++) {
-            this.matrix[r] = []; // corrected typo
+            this.matriz[r] = []; // corrected typo
             for (let c = 0; c < this.cols; c++) {
-                this.matrix[r][c] = 0;
+                this.matriz[r][c] = 0;
             }
         }
     }
@@ -47,19 +47,19 @@ export class Grid {
         for (let r = 0; r < this.rows; r++) {
             for (let c = 0; c < this.cols; c++) {
                 const position = this.getCoordinates(c, r);
-                if (this.matrix[r][c] !== 0) {
-                    this.drawSquare(position.x, position.y, this.cellSize, 'gray', 'black');
+                if (this.matriz[r][c] !== 0) {
+                    this.drawSquare(position.x, position.y, this.cellSize, 'blue', 'black');
                 } else {
-                    this.drawSquare(position.x, position.y, this.cellSize, 'white', 'black');
+                    this.drawSquare(position.x, position.y, this.cellSize, 'black', 'white');
                 }
             }
         }
-        this.printMatrix();
+        this.printmatriz();
     }
 
-    printMatrix() {
+    printmatriz() {
         let text = "";
-        this.matrix.forEach((row) => {
+        this.matriz.forEach((row) => {
             text += row.join(" ") + "\n";
         });
         console.log(text);

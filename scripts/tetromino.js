@@ -36,44 +36,44 @@ class Tetromino {
     getColorPalette(id) {
         const palette = {
             1: {
-                rightTriangle: 'red',
-                leftTriangle: 'blue',
-                square: 'yellow',
+                rightTriangle: 'green',
+                leftTriangle: 'purple',
+                square: 'orange',
             },
             2: {
-                rightTriangle: 'red',
-                leftTriangle: 'blue',
-                square: 'yellow',
+                rightTriangle: 'blue',
+                leftTriangle: 'yellow',
+                square: 'red',
             },
             3: {
-                rightTriangle: 'red',
-                leftTriangle: 'blue',
-                square: 'yellow',
+                rightTriangle: 'purple',
+                leftTriangle: 'green',
+                square: 'blue',
             },
             4: {
-                rightTriangle: 'red',
-                leftTriangle: 'blue',
-                square: 'yellow',
+                rightTriangle: 'orange',
+                leftTriangle: 'red',
+                square: 'purple',
             },
             5: {
-                rightTriangle: 'red',
+                rightTriangle: 'yellow',
                 leftTriangle: 'blue',
-                square: 'yellow',
+                square: 'green',
             },
             6: {
                 rightTriangle: 'red',
-                leftTriangle: 'blue',
+                leftTriangle: 'orange',
                 square: 'yellow',
             },
             7: {
-                rightTriangle: 'red',
-                leftTriangle: 'blue',
-                square: 'yellow',
+                rightTriangle: 'blue',
+                leftTriangle: 'purple',
+                square: 'red',
             },
             8: {
-                rightTriangle: 'red',
-                leftTriangle: 'blue',
-                square: 'yellow',
+                rightTriangle: 'green',
+                leftTriangle: 'yellow',
+                square: 'orange',
             },
         };
         return palette[id] || palette[1];
@@ -103,7 +103,7 @@ class Tetromino {
         }
     }
 
-    currentPosition() {
+    currentPositions() {
         const position = [];
         const shape = this.currentShape();
         for (let i = 0; i < shape.length; i++) {
@@ -135,10 +135,10 @@ const TetrominoTypes = {
         id: 1,
         initPosition: new Position(0, 3),
         shapes: [
-            [new Position(0, 1), new Position(0, 0), new Position(0, 2), new Position(1, 1)],
-            [new Position(1, 1), new Position(0, 1), new Position(2, 1), new Position(1, 0)],
-            [new Position(1, 0), new Position(1, 1), new Position(1, 2), new Position(0, 1)],
-            [new Position(0, 1), new Position(1, 1), new Position(2, 1), new Position(1, 2)]
+            [new Position(0, 1), new Position(1, 0), new Position(1, 1), new Position(1, 2)],
+            [new Position(0, 1), new Position(1, 1), new Position(1, 2), new Position(2, 1)],
+            [new Position(1, 0), new Position(1, 1), new Position(1, 2), new Position(2, 1)],
+            [new Position(0, 1), new Position(1, 0), new Position(1, 1), new Position(2, 1)]
         ]
     },
     O: {
@@ -163,9 +163,9 @@ const TetrominoTypes = {
         initPosition: new Position(0, 3),
         shapes: [
             [new Position(0, 1), new Position(0, 2), new Position(1, 0), new Position(1, 1)],
-            [new Position(0, 0), new Position(1, 1), new Position(1, 2), new Position(2, 1)],
+            [new Position(0, 1), new Position(1, 1), new Position(1, 2), new Position(2, 2)],
             [new Position(1, 1), new Position(1, 2), new Position(2, 0), new Position(2, 1)],
-            [new Position(0, 1), new Position(1, 0), new Position(1, 1), new Position(2, 0)],
+            [new Position(0, 0), new Position(1, 0), new Position(1, 1), new Position(2, 1)],
         ]
     },
     Z: {

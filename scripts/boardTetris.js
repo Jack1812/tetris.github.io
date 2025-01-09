@@ -8,25 +8,25 @@ export class BoardTetris extends Grid{
         return row>= 0 && row<this.rows && col>=0 && col<this.cols;
     }
     isEmpty(row, col){
-        return this.isInside(row, col)  && this.matrix[row][col] === 0;
+        return this.isInside(row, col)  && this.matriz[row][col] === 0;
     }
     isRowFull(row){
-        return this.matrix[row].every(element => element !== 0);
+        return this.matriz[row].every(element => element !== 0);
     }
     isRowEmpty(row){
-        return this.matrix[row].every(element => element === 0);
+        return this.matriz[row].every(element => element === 0);
     }
     clearRow(row){
-        this.matrix[row].fill(0);
+        this.matriz[row].fill(0);
     }
     moveRowDown(row, numRows){
-        this.matriz[row + numRows] = this.matrix[row];
+        this.matriz[row + numRows] = this.matriz[row].slice();
         this.clearRow(row);
     }
     clearFullRows(){
         let cont = 0;
 
-        for(let row = this.row - 1; row >= 0; row--){
+        for(let row = this.rows - 1; row >= 0; row--){
             if(this.isRowFull(row)){
                 this.clearRow(row);
                 cont++;
