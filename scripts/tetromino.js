@@ -237,4 +237,4 @@ class TetrominosBag {
         }    
 }
 
-export { Position, Tetromino, TetrominoTypes, TetrominosBag};
+export { Position, Tetromino, TetrominoTypes, TetrominosBag}

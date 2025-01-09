@@ -4,11 +4,11 @@ export class BoardTetris extends Grid{
     constructor(canvas, rows, cols, cellSize, space){
         super(canvas, rows, cols, cellSize, space);
     }
-    isInsideBoard(row, col){
+    isInside(row, col){
         return row>= 0 && row<this.rows && col>=0 && col<this.cols;
     }
-    isEmptyCell(row, col){
-        return this.matrix[row][col] === 0 && this.isInside(row, col);
+    isEmpty(row, col){
+        return this.isInside(row, col)  && this.matrix[row][col] === 0;
     }
     isRowFull(row){
         return this.matrix[row].every(element => element !== 0);
