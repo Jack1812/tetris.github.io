@@ -9,14 +9,14 @@ export class Grid {
         this.cellSize = cellSize; // corrected typo
         this.space = space;
         this.matriz = []; // corrected typo
-        this.resetmatriz(); // corrected typo
+        this.restartMatriz(); // corrected typo
         this.canvas.width = this.cols * this.cellSize + (this.space*this.cols);
         this.canvas.height = this.rows * this.cellSize + (this.space*this.rows);    
 
         this.block = new Tetromino(this.canvas, this.cellSize, [], {row: 0, col: 0}, 0, 'black'); // corrected typo
     }
 
-    resetmatriz() { // corrected typo
+    restartMatriz() { // corrected typo
         for (let r = 0; r < this.rows; r++) {
             this.matriz[r] = []; // corrected typo
             for (let c = 0; c < this.cols; c++) {
@@ -25,8 +25,8 @@ export class Grid {
         }
     }
 
-    drawSquare(x, y, side, color, borderColor) {
-        const borderSize = side / 10; // corrected typo
+    drawSquare(x, y, side, color, borderColor,border) {
+        const borderSize = side / border; // corrected typo
 
         this.ctx.fillStyle = color;
         this.ctx.fillRect(x, y, side, side);
@@ -39,7 +39,7 @@ export class Grid {
     getCoordinates(col, row) {
         return {
             x: col * this.cellSize + this.space,
-            y: row * this.cellSize + this.space
+            y: row * this.cellSize + this.space,
         };
     }
 
@@ -48,13 +48,38 @@ export class Grid {
             for (let c = 0; c < this.cols; c++) {
                 const position = this.getCoordinates(c, r);
                 if (this.matriz[r][c] !== 0) {
-                    this.drawSquare(position.x, position.y, this.cellSize, 'blue', 'black');
+                    this.block.drawBlock(position.x, position.y, this.matriz[r][c]);
                 } else {
-                    this.drawSquare(position.x, position.y, this.cellSize, 'black', 'white');
+                    this.drawSquare(position.x, position.y, this.cellSize, "#000", "#303030",10);
                 }
             }
         }
         this.printmatriz();
+    }
+
+    draw2() {
+        this.drawBackground();
+        for (let r = 0; r < this.rows; r++) {
+            for (let c = 0; c < this.cols; c++) {
+                const position = this.getCoordinates(c, r);
+                if (this.matriz[r][c] !== 0) {
+                    if(this.matriz[r][c] === 2)
+                        this.block.drawBlock(position.x + this.cellSize, position.y, this.matriz[r][c]);
+                    }
+                    else if(this.matriz[r][c] === 3 ) {
+                        this.block.drawBlock(position.x, position.y, this.matriz[r][c]);
+                    }
+                    else {
+                        this.block.drawBlock(position.x + this.cellSize/2,position.y, this.matriz[r][c]);
+                       
+                }
+            }
+        }
+    }    
+    drawBackground() {
+        this.ctx.fillStyle = "black";
+        this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
+
     }
 
     printmatriz() {

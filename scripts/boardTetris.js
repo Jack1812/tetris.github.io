@@ -41,3 +41,21 @@ export class BoardTetris extends Grid{
         return !(this.isRowEmpty(0));
     }  
 }
+export class BoardNext extends Grid{
+    constructor(canvas, rows, cols, cellSize, space,listTetrominos){
+        super(canvas, rows, cols, cellSize, space);
+        this.listTetrominos = listTetrominos;
+        this.updateMatriz();
+    }
+    updateMatriz(){
+        this.restartMatriz();
+        let cont = 0;
+        for (let i = 0; i < this.listTetrominos.length; i++){
+            const shape = this.listTetrominos[i].currentShape();
+            for (let j = 0; j <shape.length; j++){
+                this.matriz[shape[j].row + cont][shape[j].column] = this.listTetrominos[i].id;
+            }
+            cont+=3;
+        }
+    }
+}
