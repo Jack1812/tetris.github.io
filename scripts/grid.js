@@ -63,7 +63,7 @@ export class Grid {
             for (let c = 0; c < this.cols; c++) {
                 const position = this.getCoordinates(c, r);
                 if (this.matriz[r][c] !== 0) {
-                    if(this.matriz[r][c] === 2)
+                    if(this.matriz[r][c] === 2){
                         this.block.drawBlock(position.x + this.cellSize, position.y, this.matriz[r][c]);
                     }
                     else if(this.matriz[r][c] === 3 ) {
@@ -71,7 +71,7 @@ export class Grid {
                     }
                     else {
                         this.block.drawBlock(position.x + this.cellSize/2,position.y, this.matriz[r][c]);
-                       
+                    }  
                 }
             }
         }

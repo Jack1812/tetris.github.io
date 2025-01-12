@@ -59,3 +59,19 @@ export class BoardNext extends Grid{
         }
     }
 }
+export class BoardHold extends Grid{
+    constructor(canvas, rows, cols, cellSize, space){
+        super(canvas, rows, cols, cellSize, space);
+        this.tetromino = null;
+        this.updateMatriz();
+    }
+    updateMatriz(){
+        if(this.tetromino === null) return;
+        this.tetromino.reset();
+        this.restartMatriz();
+        const shape = this.tetromino.currentShape();
+        for(let i = 0; i < shape.length; i++){
+            this.matriz[shape[i].row][shape[i].column] = this.tetromino.id;
+        }
+    }
+}

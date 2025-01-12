@@ -1,8 +1,8 @@
 import {  TetrominosBag } from "./tetromino.js";
-import { BoardTetris,BoardNext } from "./boardTetris.js";
+import { BoardTetris,BoardNext,BoardHold } from "./boardTetris.js";
 
 export class Game {
-    constructor(canvas, rows, cols, cellSize, space,canvasNext) {
+    constructor(canvas, rows, cols, cellSize, space,canvasNext,canvasHold) {
         this.boardTetris = new BoardTetris(canvas, rows, cols, cellSize, space);
         this.tetrominosBag = new TetrominosBag(canvas,cellSize);
         this.currentTetromino = this.tetrominosBag.nextTetromino();
@@ -12,6 +12,8 @@ export class Game {
         this.lastTime = 0;
         this.lastTime2 = 0;
         this.next = new BoardNext(canvasNext, 8, 4, cellSize, space,this.tetrominosBag.getThreeNextTetrominos());
+        this.hold = new BoardHold(canvasHold,2,4,cellSize,space);
+        this.canvasHold = true;
     }
     update() {
         let currentTime = Date.now();
@@ -26,6 +28,7 @@ export class Game {
             this. drawTetrominoGhost();
             this.currentTetromino.draw(this.boardTetris);
             this.next.draw2();
+            this.hold.draw2();
             if (this.keys.down) {
                 this.moveTetrominoDown();
             }
@@ -110,6 +113,7 @@ export class Game {
             this.currentTetromino = this.tetrominosBag.nextTetromino();
             this.next.listTetrominos = this.tetrominosBag.getThreeNextTetrominos();
             this.next.updateMatriz();
+            this.canHold = true;
         }
      }  
      dropDistance(position){
@@ -145,6 +149,17 @@ export class Game {
         this.currentTetromino.move(this.tetrominoDropDistance(), 0);
         this.placeTetromino();
     }
+    holdTetromino() {
+        if(!this.canHold) return;
+        if(this.hold.tetromino === null) {
+            this.hold.tetromino = this.currentTetromino;
+            this.currentTetromino = this.tetrominosBag.nextTetromino();
+        } else {
+            [this.currentTetromino, this.hold.tetromino] = [this.hold.tetromino, this.currentTetromino]
+        }
+        this.hold.updateMatriz();
+        this.canHold = false;
+    }
      keyboar() {
         window.addEventListener("keydown",(evt)=>{
             if(evt.key === "ArrowLeft") {
@@ -159,6 +174,9 @@ export class Game {
             }
             if(evt.key === 'ArrowDown') {
                 this.keys.down = true;
+            }
+            if(evt.key === "c" || evt.key === "C") {
+                this.holdTetromino();
             }
         });
         window.addEventListener("keyup", (evt) => {
