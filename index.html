@@ -8,13 +8,22 @@
 </head>
 <body>
     <div class="canvas-container">
-        <canvas id="canvas-hold"></canvas>
+        <span>HOLD</span>
+        <div class="canvas">
+            <canvas id="canvas-hold"></canvas>
+        </div>
     </div>
     <div class="canvas-container">
+        <span class="score-container">SCORE:<span id="core">0</span>></span>
+        <div class="canvas">
         <canvas id="canvas-tetris"></canvas>
+        </div>
     </div>
     <div class="canvas-container">
-        <canvas id="canvas-next"></canvas>
+        <span>Next</span>
+        <div class="canvas">
+            <canvas id="canvas-next"></canvas>
+        </div>
     </div>
     
     <script src="scripts/main.js" type="module"></script>
