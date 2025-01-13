@@ -38,11 +38,29 @@ body{
   padding: 12px 15px;
   border-radius: 8px;
 }
-.canvas-container span{
+.canvas-container span,
+.menu span{
   color: white;
   font-size: 25px;
 }
 
-.canvas-container .score-container {
+.canvas-container .score-container,
+#score {
   font-size: 20px
+}
+.menu{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background-color: black;
+  border: 10px solid white;
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 30px;
+}
+.menu button{
+  padding: 5px;
+  cursor: pointer;
 }

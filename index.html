@@ -7,6 +7,7 @@
         <link rel="icon" href="Tetris_logo.png" >
 </head>
 <body>
+    <div class="game">
     <div class="canvas-container">
         <span>HOLD</span>
         <div class="canvas">
@@ -14,7 +15,7 @@
         </div>
     </div>
     <div class="canvas-container">
-        <span class="score-container">SCORE:<span id="core">0</span>></span>
+        <span class="score-container">SCORE:<span id="score">0</span>></span>
         <div class="canvas">
         <canvas id="canvas-tetris"></canvas>
         </div>
@@ -25,7 +26,13 @@
             <canvas id="canvas-next"></canvas>
         </div>
     </div>
+    <div class="menu" id="menu">
+        <span>TETRIS</span>
+        <button id="btn-start">START</button>
+    </div>
+    </div>
     
     <script src="scripts/main.js" type="module"></script>
+</div>
 </body>
 </html>

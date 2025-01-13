@@ -13,7 +13,9 @@ export class Game {
         this.lastTime2 = 0;
         this.next = new BoardNext(canvasNext, 8, 4, cellSize, space,this.tetrominosBag.getThreeNextTetrominos());
         this.hold = new BoardHold(canvasHold,2,4,cellSize,space);
-        this.canvasHold = true;
+        this.canHold = true;
+        this.score = 0;
+        this.gameOver = false;
     }
     update() {
         let currentTime = Date.now();
@@ -105,9 +107,12 @@ export class Game {
                 [tetrominoPositions[i].column] = this.currentTetromino.id;
         }
         
-        this.boardTetris.clearFullRows();
+        this.score += this.boardTetris.clearFullRows()*7;
         
         if (this.boardTetris.gameOver()) {
+            setTimeout(() => {
+                this.gameOver =true;
+            },500);
             return true;
         }else {
             this.currentTetromino = this.tetrominosBag.nextTetromino();
@@ -160,6 +165,23 @@ export class Game {
         this.hold.updateMatriz();
         this.canHold = false;
     }
+    reset(){
+        this.gameOver = false;
+        this.boardTetris.restartMatriz();
+        this.score = 0;
+        this.hold.tetromino = null;
+        this.tetrominosBag.reset();
+        this.currentTetromino = this.tetrominosBag.nextTetromino();
+        this.hold.drawBackground();
+
+        this.canHold =true;
+        this.hold.restartMatriz();
+        this.next.restartMatriz();
+        this.next.listTetrominos = this.tetrominosBag.getThreeNextTetrominos();
+        this.next.updateMatriz();
+        this.next.draw2();
+
+    }
      keyboar() {
         window.addEventListener("keydown",(evt)=>{
             if(evt.key === "ArrowLeft") {
@@ -187,8 +209,10 @@ export class Game {
                 this.keys.down = false;
             }
         });   
-        window.addEventListener("click", (evt) => {
-            this.dropBlock();
+        window.addEventListener("click", () => {
+            if(!this.gameOver){
+                this.dropBlock();
+            }
         });
         
 
